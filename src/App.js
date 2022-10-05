@@ -1,19 +1,19 @@
-import styled, { createGlobalStyle } from "styled-components";
-import Login from "./components/Login";
+import { createGlobalStyle } from "styled-components";
+import TodoList from "./pages/TodoList";
 
 function App() {
   return (
     <>
-      <Login />
-      <GlobalStyled />
+      <TodoList />
+      <GlobalStyle />
     </>
   );
 }
 
 export default App;
 
-const GlobalStyled = createGlobalStyle`
-html, body, div, span, applet, object, iframe,
+const GlobalStyle = createGlobalStyle`
+  html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -61,6 +61,16 @@ table {
 }
 a{
   text-decoration: none;
-  color:inherit;
+  color: inherit;
+}
+body{
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color:#262626;
 }
 `;
