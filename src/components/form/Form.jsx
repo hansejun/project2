@@ -6,6 +6,7 @@ import { todosState } from "../../atom";
 function Form() {
   const [inputs, setInputs] = useState({ color: "", text: "" });
   const idRef = useRef(0);
+  const inputRef = useRef();
   const setTodos = useSetRecoilState(todosState);
   const onSubmit = (e) => {
     e.preventDefault();
@@ -24,7 +25,9 @@ function Form() {
   const onChange = (e) => {
     const { name, value } = e.target;
     setInputs({ ...inputs, [name]: value });
+    inputRef.current.focus();
   };
+
   return (
     <FormBox onSubmit={onSubmit}>
       <ColorBox>
@@ -78,6 +81,8 @@ function Form() {
           onChange={onChange}
           value={inputs.text}
           name="text"
+          ref={inputRef}
+          required
         />
         <button>Add</button>
       </InputBox>
