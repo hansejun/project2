@@ -1,25 +1,17 @@
 import { DragDropContext } from "react-beautiful-dnd";
-import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { todosState } from "../atom";
 import Form from "../components/form/Form";
 import Layout from "../components/layout/Layout";
 import List from "../components/list/List";
-
+import { useSelector, useDispatch } from "react-redux";
+import { changeTodo } from "../redux/modules/todos";
 function TodoList() {
-  const [todos, setTodos] = useRecoilState(todosState);
+  const todos = useSelector((state) => state.todos);
+  const dispatch = useDispatch();
   const onDragEnd = (data) => {
     const idx = data.source.index;
     const targetIdx = data.destination.index;
-    console.log(idx, targetIdx);
-    setTodos((prev) => {
-      let newTodos = [...prev];
-      [newTodos[idx], newTodos[targetIdx]] = [
-        newTodos[targetIdx],
-        newTodos[idx],
-      ];
-      return newTodos;
-    });
+    dispatch(changeTodo({ idx, targetIdx }));
   };
   return (
     <DragDropContext onDragEnd={onDragEnd}>

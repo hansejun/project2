@@ -2,14 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { RecoilRoot } from "recoil";
+import { createStore } from "redux";
+import routeReducers from "./redux/config/configStore";
+import { Provider } from "react-redux";
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
+const store = createStore(routeReducers);
 root.render(
   <React.StrictMode>
-    <RecoilRoot>
+    <Provider store={store}>
       <App />
-    </RecoilRoot>
+    </Provider>
   </React.StrictMode>
 );
 

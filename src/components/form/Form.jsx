@@ -1,24 +1,23 @@
 import { useRef, useState } from "react";
-import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { todosState } from "../../atom";
+import { useDispatch } from "react-redux";
+import { addTodo } from "../../redux/modules/todos";
 
 function Form() {
   const [inputs, setInputs] = useState({ color: "", text: "" });
   const idRef = useRef(0);
   const inputRef = useRef();
-  const setTodos = useSetRecoilState(todosState);
+  const dispatch = useDispatch();
   const onSubmit = (e) => {
     e.preventDefault();
-    setTodos((prev) => [
-      ...prev,
-      {
+    dispatch(
+      addTodo({
         id: idRef.current,
         ...inputs,
         isDone: false,
         createdAt: new Date().toDateString().slice(4),
-      },
-    ]);
+      })
+    );
     idRef.current += 1;
     setInputs({ color: "", text: "" });
   };

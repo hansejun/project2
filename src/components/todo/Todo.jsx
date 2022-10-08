@@ -1,20 +1,15 @@
 import { Draggable } from "react-beautiful-dnd";
-import { useSetRecoilState } from "recoil";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { todosState } from "../../atom";
+import { removeTodo, toggleTodo } from "../../redux/modules/todos";
 
 function Todo({ id, text, createdAt, color, index }) {
-  const setTodos = useSetRecoilState(todosState);
-
+  const dispatch = useDispatch();
   const onToggle = () => {
-    setTodos((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, isDone: !item["isDone"] } : item
-      )
-    );
+    dispatch(toggleTodo({ id }));
   };
   const onDelete = () => {
-    setTodos((prev) => prev.filter((item) => item.id !== id));
+    dispatch(removeTodo({ id }));
   };
   return (
     <Draggable draggableId={id + ""} index={index}>
